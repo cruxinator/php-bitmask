@@ -27,7 +27,6 @@
     },
     "require": {
         "php": ">=7.1",
-        "ext-json": "*",
         "myclabs/php-enum": "^1.7"
     },
     "require-dev": {
