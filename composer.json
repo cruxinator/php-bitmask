@@ -1,0 +1,36 @@
+{
+    "name": "cruxinator/php-bitmask",
+    "type": "library",
+    "description": "PHP Bitmask implementation",
+    "keywords": ["enum"],
+    "homepage": "https://github.com/cruxinator/php-bitmask",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Harris",
+            "homepage": "https://cruxinator.com/"
+        },
+        {
+            "name": "Alex Goodwin",
+            "homepage": "https://cruxinator.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cruxinator\\BitMask\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cruxinator\\BitMask\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "ext-json": "*",
+        "myclabs/php-enum": "^1.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
