@@ -2,7 +2,7 @@
     "name": "cruxinator/php-bitmask",
     "type": "library",
     "description": "PHP Bitmask implementation",
-    "keywords": ["enum"],
+    "keywords": ["enum", "Bitmask"],
     "homepage": "https://github.com/cruxinator/php-bitmask",
     "license": "MIT",
     "authors": [
