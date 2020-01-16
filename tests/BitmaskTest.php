@@ -10,17 +10,17 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetValue()
     {
-        $value = new EnumFixture(EnumFixture::FOUR);
-        $this->assertEquals(EnumFixture::FOUR, $value->getValue());
-        $value = new EnumFixture(EnumFixture::EIGHT);
-        $this->assertEquals(EnumFixture::EIGHT, $value->getValue());
-        $value = new EnumFixture(EnumFixture::THIRTYTWO);
-        $this->assertEquals(EnumFixture::THIRTYTWO, $value->getValue());
+        $value = new BitMaskFixture(BitMaskFixture::FOUR);
+        $this->assertEquals(BitMaskFixture::FOUR, $value->getValue());
+        $value = new BitMaskFixture(BitMaskFixture::EIGHT);
+        $this->assertEquals(BitMaskFixture::EIGHT, $value->getValue());
+        $value = new BitMaskFixture(BitMaskFixture::THIRTYTWO);
+        $this->assertEquals(BitMaskFixture::THIRTYTWO, $value->getValue());
     }
     
     public function testFoo()
     {
-        $Val =New EnumFixture (EnumFixture::ONE | EnumFixture::TWO);
+        $Val =New BitMaskFixture (BitMaskFixture::ONE | BitMaskFixture::TWO);
         $this->assertTrue($Val->isONE());
         $this->assertTrue($Val->isTWO());
         $this->assertFalse($Val->isFOUR());
@@ -33,15 +33,16 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
     public function testBadCall()
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Method startTheDance not found on Class Cruxinator\Bitmask\Tests\EnumFixture');
-        $foo = new EnumFixture(EnumFixture::FOUR);
+        $this->expectExceptionMessage(
+            'Method startTheDance not found on Class Cruxinator\BitMask\Tests\BitMaskFixture');
+        $foo = new BitMaskFixture(BitMaskFixture::FOUR);
 
         $foo->startTheDance();
     }
 
     public function testGetName()
     {
-        $foo = new EnumFixture(EnumFixture::ONE | EnumFixture::TWO);
+        $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
         $expected = 'BitMask';
         $actual = $foo->getName();
@@ -50,7 +51,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
 
     public function testToString()
     {
-        $foo = new EnumFixture(EnumFixture::ONE | EnumFixture::TWO);
+        $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
         $expected = 'BitMask['.PHP_EOL.'\'ONE\' => TRUE'.PHP_EOL.'\'TWO\' => TRUE'.PHP_EOL.'\'FOUR\' => FALSE'.PHP_EOL;
         $expected .= '\'EIGHT\' => FALSE'.PHP_EOL.'\'SIXTEEN\' => FALSE'.PHP_EOL.'\'THIRTYTWO\' => FALSE'.PHP_EOL.']';
@@ -61,7 +62,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
 
     public function testGetKey()
     {
-        $foo = new EnumFixture(EnumFixture::ONE | EnumFixture::THIRTYTWO);
+        $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::THIRTYTWO);
         $expected = ['ONE', 'THIRTYTWO'];
 
         $actual = $foo->getKey();
