@@ -73,7 +73,7 @@ $status->setActive(false);
 
 As you can see, methods are automatically implemented to provide quick access to a Bitmask value.
 
-One advantage over using class constants is to be able to type-hint Bitnum values:
+One advantage over using class constants is to be able to type-hint Bitmap values:
 
 ```php
 function setStatus(UserStatus $action) {
