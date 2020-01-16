@@ -141,7 +141,8 @@ class UserStatus extends BitMask
     }
     /**
      * @param bool $flag
-     * @void
+     * @return self
+     */
     public function setRegistered(bool $flag){
         return $this->setFlag(self::Registered, $flag);
     }
@@ -152,9 +153,9 @@ Or you can use phpdoc (this is supported in PhpStorm for example):
 
 ```php
 /**
- * @method static UserStatusRegistered()
+ * @method static UserStatus Registered()
  * @method bool isRegistered()
- * @method void setRegistered(bool)
+ * @method UserStatus setRegistered(bool)
  */
 class UserStatus extends Bitmask
 {
