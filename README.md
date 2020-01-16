@@ -118,7 +118,7 @@ $status->setRegistered($bool);
 $status->setActive($bool);
 ```
 
-Static method helpers are implemented using [`__callStatic()`](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic) and [__call()](https://www.php.net/manual/en/language.oop5.overloading.php#object.call).
+Static method helpers are implemented using [`__callStatic()`](http://www.php.net/manual/en/language.oop5.overloading.php#object.callstatic) and [`__call()`](https://www.php.net/manual/en/language.oop5.overloading.php#object.call).
 
 If you care about IDE autocompletion, you can either implement the static methods yourself:
 
