@@ -5,7 +5,7 @@ namespace Cruxinator\BitMask\Tests;
 
 use Cruxinator\BitMask\BitMask;
 
-class EnumFixture extends BitMask
+class BitMaskFixture extends BitMask
 {
     const ONE = 1;
     const TWO = 2;

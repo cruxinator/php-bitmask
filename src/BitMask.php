@@ -8,7 +8,6 @@ use MyCLabs\Enum\Enum;
 
 abstract class BitMask extends Enum
 {
-
     protected function isFlagSet(int $flag) : bool
     {
         return (($this->value & $flag) == $flag);
@@ -26,8 +25,8 @@ abstract class BitMask extends Enum
     /**
      * @param $name
      * @param $arguments
-     * @return bool|null
      * @throws \ReflectionException
+     * @return bool|null
      */
     public function __call($name, $arguments)
     {
@@ -38,19 +37,19 @@ abstract class BitMask extends Enum
             if (isset($array[$actualName]) || array_key_exists($actualName, $array)) {
                 return $this->isFlagSet($array[$actualName]);
             }
-        } else if(substr($name,0,3) === 'set'){
+        } elseif (substr($name, 0, 3) === 'set') {
             $actualName = substr($name, 3);
             if (isset($array[$actualName]) || array_key_exists($actualName, $array)) {
                 return $this->setFlag($array[$actualName], $arguments[0]);
             }
         }
-        throw new BadMethodCallException(sprintf('Method %s not found on Class %s',$name, get_class($this)));
+        throw new BadMethodCallException(sprintf('Method %s not found on Class %s', $name, get_class($this)));
     }
 
     /**
      * @param $value
-     * @return bool
      * @throws \ReflectionException
+     * @return bool
      */
     public static function isValid($value)
     {
@@ -60,8 +59,8 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @return array
      * @throws \ReflectionException
+     * @return array
      */
     public static function toArray()
     {
@@ -76,14 +75,14 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @return array|mixed
      * @throws \ReflectionException
+     * @return array|mixed
      */
     public function getKey()
     {
         $value = $this->value;
         $f = array_filter(static::toArray(), function (
-            /** @noinspection PhpUnusedParameterInspection needed for function def */ $key) use (&$value) {
+            /* @noinspection PhpUnusedParameterInspection needed for function def */ $key) use (&$value) {
             $isSet = $value & 1;
             $value = $value >> 1;
             return $isSet;
@@ -93,8 +92,8 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @return string
      * @throws \ReflectionException
+     * @return string
      */
     public function __toString()
     {
@@ -102,12 +101,11 @@ abstract class BitMask extends Enum
         $array = static::toArray();
         $ret = '';
         foreach ($array as $key => $value) {
-            $ret .= "'" . $key . "' => " . ($this->{"is" . $key}() ? "TRUE" : "FALSE") . PHP_EOL;
+            $ret .= "'" . $key . "' => " . ($this->{'is' . $key}() ? 'TRUE' : 'FALSE') . PHP_EOL;
         }
         return $name . '[' . PHP_EOL .
             $ret .
             ']'. PHP_EOL;
-
     }
 
     public function getName()

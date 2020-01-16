@@ -2,11 +2,10 @@
 
 namespace Cruxinator\BitMask\Tests;
 
-
 class BitmaskTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * getValue()
+     * getValue().
      */
     public function testGetValue()
     {
@@ -20,7 +19,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
     
     public function testFoo()
     {
-        $Val =New EnumFixture (EnumFixture::ONE | EnumFixture::TWO);
+        $Val =new EnumFixture(EnumFixture::ONE | EnumFixture::TWO);
         $this->assertTrue($Val->isONE());
         $this->assertTrue($Val->isTWO());
         $this->assertFalse($Val->isFOUR());
