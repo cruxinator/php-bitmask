@@ -32,18 +32,17 @@ abstract class BitMask extends Enum
     public function __call($name, $arguments)
     {
         $array = static::toArray();
-        $sub =  array_reduce(['is','set'], function($carry, $item ) use ($name){
-            return substr($name,0,strlen($item)) === $item ? strlen($item) : $carry;
-        },false);
+        $sub =  array_reduce(['is','set'], function ($carry, $item) use ($name) {
+            return substr($name, 0, strlen($item)) === $item ? strlen($item) : $carry;
+        }, false);
         
-        if($sub !== false){
+        if ($sub !== false) {
             $actualName = substr($name, $sub);
             if (isset($array[$actualName]) || array_key_exists($actualName, $array)) {
                 return $sub === 2 ? $this->isFlagSet($array[$actualName]) : $this->setFlag($array[$actualName], $arguments[0]);
             }
         }
         throw new BadMethodCallException(sprintf('Method %s not found on Class %s', $name, get_class($this)));
-
     }
 
     /**
