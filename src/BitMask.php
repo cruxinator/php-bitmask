@@ -21,12 +21,13 @@ abstract class BitMask extends Enum
         } else {
             $this->value &= ~$flag;
         }
+        return $this;
     }
 
     /**
      * @param $name
      * @param $arguments
-     * @return bool|null
+     * @return bool|self
      * @throws \ReflectionException
      */
     public function __call($name, $arguments)
