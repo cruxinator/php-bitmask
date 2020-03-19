@@ -10,13 +10,14 @@ abstract class BitMask extends Enum
 {
     protected function isFlagSet(int $flag) : bool
     {
-        return (($this->value & $flag) == $flag);
+        return $flag === 0 ? $this->value === 0 : (($this->value & $flag) == $flag);
     }
 
     protected function setFlag(int $flag, bool $value)
     {
+        
         if ($value) {
-            $this->value |= $flag;
+            $this->value = $flag === 0 ? 0 : $this->value | $flag;
         } else {
             $this->value &= ~$flag;
         }
