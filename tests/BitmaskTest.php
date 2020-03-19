@@ -33,7 +33,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Method startTheDance not found on Class Cruxinator\BitMask\Tests\BitMaskFixture');
+            'Enum startTheDance not found on Cruxinator\BitMask\Tests\BitMaskFixture');
         $foo = new BitMaskFixture(BitMaskFixture::FOUR);
 
         $foo->startTheDance();
