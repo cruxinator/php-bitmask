@@ -42,7 +42,7 @@ abstract class BitMask extends Enum
                 return $sub === 2 ? $this->isFlagSet($array[$actualName]) : $this->setFlag($array[$actualName], $arguments[0]);
             }
         }
-        throw new BadMethodCallException(sprintf('Method %s not found on Class %s', $name, get_class($this)));
+        throw new BadMethodCallException(sprintf('Enum %s not found on %s', $name, get_class($this)));
     }
 
     /**
