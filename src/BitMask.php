@@ -15,7 +15,7 @@ abstract class BitMask extends Enum
 
     protected function setFlag(int $flag, bool $value)
     {
-        
+
         if ($value) {
             $this->value = $flag === 0 ? 0 : $this->value | $flag;
         } else {
@@ -81,8 +81,7 @@ abstract class BitMask extends Enum
     public function getKey()
     {
         $value = $this->value;
-        $f = array_filter(static::toArray(), function (
-            /* @noinspection PhpUnusedParameterInspection needed for function def */ $key) use (&$value) {
+        $f = array_filter(static::toArray(), function () use (&$value) {
             $isSet = $value & 1;
             $value = $value >> 1;
             return $isSet;
