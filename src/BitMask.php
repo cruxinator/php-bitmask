@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Cruxinator\BitMask;
 
@@ -8,14 +10,13 @@ use MyCLabs\Enum\Enum;
 
 abstract class BitMask extends Enum
 {
-    protected function isFlagSet(int $flag) : bool
+    protected function isFlagSet(int $flag): bool
     {
         return $flag === 0 ? $this->value === 0 : (($this->value & $flag) == $flag);
     }
 
     protected function setFlag(int $flag, bool $value)
     {
-
         if ($value) {
             $this->value = $flag === 0 ? 0 : $this->value | $flag;
         } else {
@@ -33,10 +34,10 @@ abstract class BitMask extends Enum
     public function __call($name, $arguments)
     {
         $array = static::toArray();
-        $sub =  array_reduce(['is','set'], function ($carry, $item) use ($name) {
+        $sub   =  array_reduce(['is','set'], function ($carry, $item) use ($name) {
             return substr($name, 0, strlen($item)) === $item ? strlen($item) : $carry;
         }, false);
-        
+
         if ($sub !== false) {
             $actualName = substr($name, $sub);
             if (isset($array[$actualName]) || array_key_exists($actualName, $array)) {
@@ -81,7 +82,7 @@ abstract class BitMask extends Enum
     public function getKey()
     {
         $value = $this->value;
-        $f = array_filter(static::toArray(), function () use (&$value) {
+        $f     = array_filter(static::toArray(), function () use (&$value) {
             $isSet = $value & 1;
             $value = $value >> 1;
             return $isSet;
@@ -96,15 +97,15 @@ abstract class BitMask extends Enum
      */
     public function __toString()
     {
-        $name = $this->getName();
+        $name  = $this->getName();
         $array = static::toArray();
-        $ret = '';
+        $ret   = '';
         foreach ($array as $key => $value) {
             $ret .= "'" . $key . "' => " . ($this->{'is' . $key}() ? 'TRUE' : 'FALSE') . PHP_EOL;
         }
         return $name . '[' . PHP_EOL .
             $ret .
-            ']'. PHP_EOL;
+            ']' . PHP_EOL;
     }
 
     public function getName()
