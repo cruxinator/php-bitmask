@@ -94,6 +94,5 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
             'All defined Const on Enum Cruxinator\BitMask\Tests\BadBitMaskFixture should be integers'
         );
         $fixture = BadBitMaskFixture::BadValue();
-
     }
 }
