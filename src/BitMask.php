@@ -34,7 +34,7 @@ abstract class BitMask extends Enum
      */
     public function __call($name, $arguments)
     {
-        $array = static::toArray();
+        $array     = static::toArray();
         $regexBase = '/(is|set)(%s)/m';
         $regexFull = sprintf($regexBase, implode('|', array_keys($array)));
         preg_match($regexFull, $name, $match);
