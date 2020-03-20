@@ -62,8 +62,8 @@ abstract class BitMask extends Enum
     public static function toArray()
     {
         $firstTime = !isset(static::$cache[static::class]);
-        $array = parent::toArray();
-        $firstTime && array_walk($array, function ($item) {
+        $array     = parent::toArray();
+        $firstTime && array_walk($array, function ($item): void {
             if (!is_integer($item)) {
                 throw new UnexpectedValueException(
                     sprintf('All defined Const on Enum %s should be integers', static::class)
