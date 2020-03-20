@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cruxinator\BitMask;
 
 use BadMethodCallException;
+use UnexpectedValueException;
 use MyCLabs\Enum\Enum;
 
 abstract class BitMask extends Enum
@@ -60,13 +61,15 @@ abstract class BitMask extends Enum
      */
     public static function toArray()
     {
-        $array = parent::toArray();
-        //TODO: check that the array is defined correctly. basically check everything in the array is a int.
-        /*$array = array_filter($array, function ($temp) {
-            $raw = log($temp, 2);
-            return is_int($temp) && 0.01 > abs($raw - round($raw));
+        if (!isset(static::$cache[static::class])) {
+            $array = parent::toArray();
+            array_walk($array, function ($item) {
+                if (!is_integer($item)) {
+                    throw new UnexpectedValueException(sprintf('All defined Const on Enum %s should be integers', static::class));
+                }
+            });
         }
-        );*/
+        $array = parent::toArray();
         return $array;
     }
 

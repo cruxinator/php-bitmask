@@ -86,4 +86,14 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($foo->isZERO());
         $this->assertFalse($foo->isTHIRTYTWO());
     }
+
+    public function testBadConst(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage(
+            'All defined Const on Enum Cruxinator\BitMask\Tests\BadBitMaskFixture should be integers'
+        );
+        $fixture = BadBitMaskFixture::BadValue();
+
+    }
 }
