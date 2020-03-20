@@ -1,0 +1,7 @@
+build_failure_conditions:
+  - 'elements.rating(<= F).new.exists'
+  - 'issues.severity(>= CRITICAL).new.exists'
+
+build:
+  environment:
+    php: 7.2.13
