@@ -9,7 +9,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
     /**
      * getValue().
      */
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $value = new BitMaskFixture(BitMaskFixture::FOUR);
         $this->assertEquals(BitMaskFixture::FOUR, $value->getValue());
@@ -19,7 +19,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(BitMaskFixture::THIRTYTWO, $value->getValue());
     }
 
-    public function testFoo()
+    public function testFoo(): void
     {
         $Val =new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
         $this->assertTrue($Val->isONE());
@@ -31,7 +31,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($Val->isTWO());
     }
 
-    public function testBadCall()
+    public function testBadCall(): void
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage(
@@ -42,7 +42,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $foo->startTheDance();
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
@@ -51,7 +51,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
@@ -62,7 +62,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testGetKey()
+    public function testGetKey(): void
     {
         $foo      = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::THIRTYTWO);
         $expected = ['ONE', 'THIRTYTWO'];
@@ -71,7 +71,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testZero()
+    public function testZero(): void
     {
         $foo = BitMaskZeroFixture::ONE();
         $this->assertTrue($foo->isONE());
