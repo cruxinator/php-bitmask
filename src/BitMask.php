@@ -9,6 +9,9 @@ use MyCLabs\Enum\Enum;
 
 abstract class BitMask extends Enum
 {
+    // Because 0 is the identity element when ORing a bitmask, we have to special-case it when ANDing bitmasks
+    // (akin to ordinary division by 0, the addition identity element on integers/rationals/reals)
+
     protected function isFlag(int $flag): bool
     {
         return $flag === 0 ? $this->value === 0 : (($this->value & $flag) == $flag);
