@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cruxinator\BitMask;
 
-use function array_key_exists;
 use BadMethodCallException;
 use MyCLabs\Enum\Enum;
 
