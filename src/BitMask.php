@@ -20,7 +20,7 @@ abstract class BitMask extends Enum
         if ($value) {
             $this->value = $flag === 0 ? 0 : $this->value | $flag;
         } else {
-            $this->value &= ~$flag;
+            $this->value = $flag === 0 ? $this->value : $this->value & ~$flag;
         }
         return $this;
     }
