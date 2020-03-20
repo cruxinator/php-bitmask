@@ -28,7 +28,6 @@ abstract class BitMask extends Enum
     /**
      * @param $name
      * @param $arguments
-     * @throws \ReflectionException
      * @return bool|self
      */
     public function __call($name, $arguments)
@@ -51,7 +50,6 @@ abstract class BitMask extends Enum
 
     /**
      * @param $value
-     * @throws \ReflectionException
      * @return bool
      */
     public static function isValid($value)
@@ -62,7 +60,6 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @throws \ReflectionException
      * @return array
      */
     public static function toArray()
@@ -78,7 +75,6 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @throws \ReflectionException
      * @return array|mixed
      */
     public function getKey()
@@ -94,7 +90,6 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @throws \ReflectionException
      * @return string
      */
     public function __toString()
