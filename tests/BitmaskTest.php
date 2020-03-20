@@ -71,7 +71,8 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testZero(){
+    public function testZero()
+    {
         $foo = BitMaskZeroFixture::ONE();
         $this->assertTrue($foo->isONE());
         $this->assertFalse($foo->isZERO());

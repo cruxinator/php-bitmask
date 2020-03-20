@@ -34,9 +34,9 @@ abstract class BitMask extends Enum
     {
         $array = static::toArray();
         $regexBase = '/(is|set)(%s)/m';
-        $regexFull = sprintf($regexBase, implode('|',array_keys($array)));
+        $regexFull = sprintf($regexBase, implode('|', array_keys($array)));
         preg_match($regexFull, $name, $match);
-        if(count($match)>0 && $match[0] === $name){
+        if (count($match)>0 && $match[0] === $name) {
             return $this->{$match[1] . 'Flag'}($array[$match[2]], $arguments[0] ?? true);
         }
         throw new BadMethodCallException(sprintf('Enum %s not found on %s', $name, get_class($this)));
