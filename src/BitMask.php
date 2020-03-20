@@ -14,15 +14,15 @@ abstract class BitMask extends Enum
 
     protected function isFlag(int $flag): bool
     {
-        return $flag === 0 ? $this->value === 0 : (($this->value & $flag) == $flag);
+        return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $flag);
     }
 
     protected function setFlag(int $flag, bool $value)
     {
         if ($value) {
-            $this->value = $flag === 0 ? 0 : $this->value | $flag;
+            $this->value = 0 === $flag ? 0 : $this->value | $flag;
         } else {
-            $this->value = $flag === 0 ? $this->value : $this->value & ~$flag;
+            $this->value = 0 === $flag  ? $this->value : $this->value & ~$flag;
         }
         return $this;
     }
