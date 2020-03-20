@@ -81,7 +81,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $foo->setTHIRTYTWO(true);
         $this->assertTrue($foo->isTHIRTYTWO());
         $this->assertFalse($foo->isZERO());
-        $foo->setZERO(true);
+        $foo->setZERO();
         $this->assertTrue($foo->isZERO());
         $this->assertFalse($foo->isTHIRTYTWO());
     }

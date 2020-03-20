@@ -41,7 +41,9 @@ abstract class BitMask extends Enum
         if ($sub !== false) {
             $actualName = substr($name, $sub);
             if (isset($array[$actualName]) || array_key_exists($actualName, $array)) {
-                return $sub === 2 ? $this->isFlagSet($array[$actualName]) : $this->setFlag($array[$actualName], $arguments[0]);
+                return $sub === 2 ?
+                    $this->isFlagSet($array[$actualName]) :
+                    $this->setFlag($array[$actualName], $arguments[0] ?? true);
             }
         }
         throw new BadMethodCallException(sprintf('Enum %s not found on %s', $name, get_class($this)));

@@ -10,22 +10,22 @@ use Cruxinator\BitMask\BitMask;
 /**
  * @method self     ONE()
  * @method bool     isONE()
- * @method self     setONE(bool $onOrOff)
+ * @method self     setONE(bool $onOrOff = true)
  * @method self     TWO()
  * @method bool     isTWO()
- * @method self     setTWO(bool $onOrOff)
+ * @method self     setTWO(bool $onOrOff = true)
  * @method self     FOUR()
  * @method bool     isFOUR()
- * @method self     setFOUR(bool $onOrOff)
+ * @method self     setFOUR(bool $onOrOff = true)
  * @method self     EIGHT()
  * @method bool     isEIGHT()
- * @method self     setEIGHT(bool $onOrOff)
+ * @method self     setEIGHT(bool $onOrOff = true)
  * @method self     SIXTEEN()
  * @method bool     isSIXTEEN()
- * @method self     setSIXTEEN(bool $onOrOff)
+ * @method self     setSIXTEEN(bool $onOrOff = true)
  * @method self     THIRTYTWO()
  * @method bool     isTHIRTYTWO()
- * @method self     setTHIRTYTWO(bool $onOrOff)
+ * @method self     setTHIRTYTWO(bool $onOrOff = true)
  */
 class BitMaskFixture extends BitMask
 {
