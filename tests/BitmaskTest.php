@@ -95,4 +95,10 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         );
         $fixture = BadBitMaskFixture::BadValue();
     }
+
+    public function testIsCompositeOf(): void
+    {
+        $fixture = BitMaskFixture::ONE();
+        $this->assertTrue($fixture->isComponantOfTHIRTYTHREE());
+    }
 }
