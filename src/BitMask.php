@@ -31,6 +31,7 @@ abstract class BitMask extends Enum
     /**
      * @param $name
      * @param $arguments
+     * @throws \ReflectionException
      * @return bool|self
      */
     public function __call($name, $arguments)
@@ -47,9 +48,10 @@ abstract class BitMask extends Enum
 
     /**
      * @param $value
+     * @throws \ReflectionException
      * @return bool
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         $min = min(static::toArray());
         $max = max(static::toArray()) * 2 - 1;
@@ -57,12 +59,15 @@ abstract class BitMask extends Enum
     }
 
     /**
+     * @throws \ReflectionException
      * @return array
      */
-    public static function toArray()
+    public static function toArray(): array
     {
         $firstTime = !isset(static::$cache[static::class]);
-        $array     = parent::toArray();
+        $array     = array_filter(parent::toArray(), function ($value): bool {
+            return is_scalar($value);
+        });
         $firstTime && array_walk($array, function ($item): void {
             if (!is_integer($item)) {
                 throw new UnexpectedValueException(
@@ -74,6 +79,7 @@ abstract class BitMask extends Enum
     }
 
     /**
+     * @throws \ReflectionException
      * @return array|mixed
      */
     public function getKey()
@@ -89,9 +95,10 @@ abstract class BitMask extends Enum
     }
 
     /**
+     * @throws \ReflectionException
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $name  = $this->getName();
         $array = static::toArray();
@@ -104,7 +111,7 @@ abstract class BitMask extends Enum
             ']' . PHP_EOL;
     }
 
-    public function getName()
+    public function getName(): string
     {
         $path = explode('\\', __CLASS__);
         return array_pop($path);
