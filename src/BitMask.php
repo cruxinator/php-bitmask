@@ -18,7 +18,7 @@ abstract class BitMask extends Enum
         return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $flag);
     }
 
-    protected function isComponantOfFlag(not $flag): bool
+    protected function isComponantOfFlag(int $flag): bool
     {
         return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $this->value);
     }
@@ -42,7 +42,7 @@ abstract class BitMask extends Enum
     public function __call($name, $arguments)
     {
         $array     = static::toArray();
-        $regexBase = '/(is|set)(%s)/m';
+        $regexBase = '/(isComponantOf|is|set)(%s)/m';
         $regexFull = sprintf($regexBase, implode('|', array_keys($array)));
         preg_match($regexFull, $name, $match);
         if (count($match)>0 && $match[0] === $name) {
