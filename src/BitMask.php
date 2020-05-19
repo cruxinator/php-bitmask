@@ -80,6 +80,7 @@ abstract class BitMask extends Enum
 
     /**
      * @return array|mixed
+     * @throws \ReflectionException
      */
     public function getKey()
     {
@@ -95,6 +96,7 @@ abstract class BitMask extends Enum
 
     /**
      * @return string
+     * @throws \ReflectionException
      */
     public function __toString()
     {
