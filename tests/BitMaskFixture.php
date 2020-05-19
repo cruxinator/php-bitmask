@@ -37,5 +37,5 @@ class BitMaskFixture extends BitMask
     const EIGHT       = 8;
     const SIXTEEN     = 16;
     const THIRTYTWO   = 32;
-    Const THIRTYTHREE = 32|1;
+    const THIRTYTHREE = 32|1;
 }
