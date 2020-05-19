@@ -29,6 +29,8 @@ use Cruxinator\BitMask\BitMask;
  */
 class BitMaskFixture extends BitMask
 {
+    protected const NON_FILTERABLE_VALUES = [2 => true, 4 => true];
+
     const ONE       = 1;
     const TWO       = 2;
     const FOUR      = 4;
