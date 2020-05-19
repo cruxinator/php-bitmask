@@ -32,6 +32,7 @@ abstract class BitMask extends Enum
      * @param $name
      * @param $arguments
      * @return bool|self
+     * @throws \ReflectionException
      */
     public function __call($name, $arguments)
     {
@@ -48,6 +49,7 @@ abstract class BitMask extends Enum
     /**
      * @param $value
      * @return bool
+     * @throws \ReflectionException
      */
     public static function isValid($value)
     {
@@ -58,11 +60,14 @@ abstract class BitMask extends Enum
 
     /**
      * @return array
+     * @throws \ReflectionException
      */
     public static function toArray()
     {
         $firstTime = !isset(static::$cache[static::class]);
-        $array     = parent::toArray();
+        $array     = array_filter(parent::toArray(), function ($value): bool {
+            return is_scalar($value);
+        });
         $firstTime && array_walk($array, function ($item): void {
             if (!is_integer($item)) {
                 throw new UnexpectedValueException(
