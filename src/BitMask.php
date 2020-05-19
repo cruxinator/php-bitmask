@@ -18,6 +18,11 @@ abstract class BitMask extends Enum
         return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $flag);
     }
 
+    protected function isComponantOfFlag(not $flag): bool
+    {
+        return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $this->value);
+    }
+
     protected function setFlag(int $flag, bool $value)
     {
         if ($value) {
