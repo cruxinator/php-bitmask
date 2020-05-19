@@ -31,10 +31,11 @@ class BitMaskFixture extends BitMask
 {
     protected const NON_FILTERABLE_VALUES = [2 => true, 4 => true];
 
-    const ONE       = 1;
-    const TWO       = 2;
-    const FOUR      = 4;
-    const EIGHT     = 8;
-    const SIXTEEN   = 16;
-    const THIRTYTWO = 32;
+    const ONE         = 1;
+    const TWO         = 2;
+    const FOUR        = 4;
+    const EIGHT       = 8;
+    const SIXTEEN     = 16;
+    const THIRTYTWO   = 32;
+    Const THIRTYTHREE = 32|1;
 }
