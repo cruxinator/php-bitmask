@@ -56,8 +56,8 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
         $expected = 'BitMask[' . PHP_EOL . '\'ONE\' => TRUE' . PHP_EOL . '\'TWO\' => TRUE' . PHP_EOL . '\'FOUR\' => FALSE' . PHP_EOL;
-        $expected .= '\'EIGHT\' => FALSE' . PHP_EOL . '\'SIXTEEN\' => FALSE' . PHP_EOL . '\'THIRTYTWO\' => FALSE' . PHP_EOL . ']';
-        $expected .= PHP_EOL;
+        $expected .= '\'EIGHT\' => FALSE' . PHP_EOL . '\'SIXTEEN\' => FALSE' . PHP_EOL . '\'THIRTYTWO\' => FALSE' . PHP_EOL;
+        $expected .= '\'THIRTYTHREE\' => FALSE' . PHP_EOL . ']' . PHP_EOL;
         $actual = $foo->__toString();
         $this->assertEquals($expected, $actual);
     }
@@ -94,5 +94,11 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
             'All defined Const on Enum Cruxinator\BitMask\Tests\BadBitMaskFixture should be integers'
         );
         $fixture = BadBitMaskFixture::BadValue();
+    }
+
+    public function testIsCompositeOf(): void
+    {
+        $fixture = BitMaskFixture::ONE();
+        $this->assertTrue($fixture->isComponentOfTHIRTYTHREE());
     }
 }
