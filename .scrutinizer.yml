@@ -1,5 +1,5 @@
 build_failure_conditions:
-  - 'elements.rating(<= F).new.exists'
+  - 'elements.rating(<= B).new.exists'
   - 'issues.severity(>= CRITICAL).new.exists'
 
 build:
