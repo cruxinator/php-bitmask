@@ -83,19 +83,12 @@ abstract class BitMask extends Enum
         return $array;
     }
 
-    /**
-     * @throws \ReflectionException
-     * @return array|mixed
-     */
     public function getKey()
     {
         $value = $this->value;
-        $f     = array_filter(static::toArray(), function () use (&$value) {
-            $isSet = $value & 1;
-            $value = $value >> 1;
-            return $isSet;
+        $f     = array_filter(static::toArray(), function ($key) use (&$value) {
+            return  $value & $key;
         });
-
         return array_keys($f);
     }
 
