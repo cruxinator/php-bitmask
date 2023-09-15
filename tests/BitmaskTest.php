@@ -67,7 +67,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $foo      = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::THIRTYTWO);
         $expected = ['ONE', 'THIRTYTWO', 'THIRTYTHREE'];
 
-        $actual = $foo->getKey();
+        $actual = BitMaskFixture::getKeyArray($foo->getValue());
         $this->assertEquals($expected, $actual);
     }
 
