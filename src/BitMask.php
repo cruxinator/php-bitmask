@@ -80,16 +80,36 @@ abstract class BitMask extends Enum
                 );
             }
         });
+
         return $array;
     }
 
+
+    /**
+     * @return string
+     */
     public function getKey()
     {
-        $value = $this->value;
-        $f     = array_filter(static::toArray(), function ($key) use (&$value) {
-            return  $value & $key;
+        return implode("|",$this->getKeyArray($this->value));
+    }
+
+    /**
+     * @return array
+     */
+    public static function getKeyArray($value)
+    {
+        $f     = array_filter(static::toArray(), function () use (&$value) {
+            return $value & $key;
         });
         return array_keys($f);
+    }
+    protected static function assertValidValueReturningKey($value): string
+    {
+        if (!static::isValid($value)) {
+            throw new \UnexpectedValueException("Value '$value' is not part of the enum " . static::class);
+        }
+
+        return implode("|",self::getKeyArray($value));
     }
 
     /**
