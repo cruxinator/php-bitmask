@@ -98,7 +98,7 @@ abstract class BitMask extends Enum
      */
     public static function getKeyArray($value)
     {
-        $f     = array_filter(static::toArray(), function () use (&$value) {
+        $f     = array_filter(static::toArray(), function ($key) use (&$value) {
             return $value & $key;
         });
         return array_keys($f);

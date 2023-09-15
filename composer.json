@@ -30,7 +30,6 @@
         "myclabs/php-enum": "^1.7"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.6.12|^10.3.4",
-        "php-coveralls/php-coveralls": "^2.2"
+        "phpunit/phpunit": "^9.5"
     }
 }
