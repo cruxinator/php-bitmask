@@ -21,7 +21,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
 
     public function testFoo(): void
     {
-        $Val =new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
+        $Val = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
         $this->assertTrue($Val->isONE());
         $this->assertTrue($Val->isTWO());
         $this->assertFalse($Val->isFOUR());
@@ -47,7 +47,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
         $expected = 'BitMask';
-        $actual   = $foo->getName();
+        $actual = $foo->getName();
         $this->assertEquals($expected, $actual);
     }
 
@@ -55,16 +55,16 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
     {
         $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::TWO);
 
-        $expected = 'BitMask[' . PHP_EOL . '\'ONE\' => TRUE' . PHP_EOL . '\'TWO\' => TRUE' . PHP_EOL . '\'FOUR\' => FALSE' . PHP_EOL;
-        $expected .= '\'EIGHT\' => FALSE' . PHP_EOL . '\'SIXTEEN\' => FALSE' . PHP_EOL . '\'THIRTYTWO\' => FALSE' . PHP_EOL;
-        $expected .= '\'THIRTYTHREE\' => FALSE' . PHP_EOL . ']' . PHP_EOL;
+        $expected = 'BitMask['.PHP_EOL.'\'ONE\' => TRUE'.PHP_EOL.'\'TWO\' => TRUE'.PHP_EOL.'\'FOUR\' => FALSE'.PHP_EOL;
+        $expected .= '\'EIGHT\' => FALSE'.PHP_EOL.'\'SIXTEEN\' => FALSE'.PHP_EOL.'\'THIRTYTWO\' => FALSE'.PHP_EOL;
+        $expected .= '\'THIRTYTHREE\' => FALSE'.PHP_EOL.']'.PHP_EOL;
         $actual = $foo->__toString();
         $this->assertEquals($expected, $actual);
     }
 
     public function testGetKey(): void
     {
-        $foo      = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::THIRTYTWO);
+        $foo = new BitMaskFixture(BitMaskFixture::ONE | BitMaskFixture::THIRTYTWO);
         $expected = ['ONE', 'THIRTYTWO', 'THIRTYTHREE'];
 
         $actual = BitMaskFixture::getKeyArray($foo->getValue());

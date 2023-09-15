@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Cruxinator\BitMask\Tests;
 
 use Cruxinator\BitMask\BitMask;
@@ -31,11 +30,11 @@ class BitMaskFixture extends BitMask
 {
     protected const NON_FILTERABLE_VALUES = [2 => true, 4 => true];
 
-    const ONE         = 1;
-    const TWO         = 2;
-    const FOUR        = 4;
-    const EIGHT       = 8;
-    const SIXTEEN     = 16;
-    const THIRTYTWO   = 32;
-    const THIRTYTHREE = 32|1;
+    const ONE = 1;
+    const TWO = 2;
+    const FOUR = 4;
+    const EIGHT = 8;
+    const SIXTEEN = 16;
+    const THIRTYTWO = 32;
+    const THIRTYTHREE = 32 | 1;
 }

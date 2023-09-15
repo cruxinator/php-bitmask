@@ -28,53 +28,61 @@ abstract class BitMask extends Enum
         if ($value) {
             $this->value = 0 === $flag ? 0 : $this->value | $flag;
         } else {
-            $this->value = 0 === $flag  ? $this->value : $this->value & ~$flag;
+            $this->value = 0 === $flag ? $this->value : $this->value & ~$flag;
         }
+
         return $this;
     }
 
     /**
      * @param $name
      * @param $arguments
+     *
      * @throws \ReflectionException
+     *
      * @return bool|self
      */
     public function __call($name, $arguments)
     {
-        $array     = static::toArray();
+        $array = static::toArray();
         $regexBase = '/(isComponentOf|is|set)(%s)/m';
         $regexFull = sprintf($regexBase, implode('$|', array_keys($array)));
         preg_match($regexFull, $name, $match);
-        if (count($match)>0 && $match[0] === $name) {
-            return $this->{$match[1] . 'Flag'}($array[$match[2]], $arguments[0] ?? true);
+        if (count($match) > 0 && $match[0] === $name) {
+            return $this->{$match[1].'Flag'}($array[$match[2]], $arguments[0] ?? true);
         }
+
         throw new BadMethodCallException(sprintf('Enum %s not found on %s', $name, get_class($this)));
     }
 
     /**
      * @param $value
+     *
      * @throws \ReflectionException
+     *
      * @return bool
      */
     public static function isValid($value): bool
     {
         $min = min(static::toArray());
         $max = max(static::toArray()) * 2 - 1;
+
         return $value >= $min && $value <= $max;
     }
 
     /**
      * @throws \ReflectionException
+     *
      * @return array
      */
     public static function toArray(): array
     {
         $firstTime = !isset(static::$cache[static::class]);
-        $array     = array_filter(parent::toArray(), function ($value): bool {
+        $array = array_filter(parent::toArray(), function ($value): bool {
             return is_scalar($value);
         });
         $firstTime && array_walk($array, function ($item): void {
-            if (!is_integer($item)) {
+            if (!is_int($item)) {
                 throw new UnexpectedValueException(
                     sprintf('All defined Const on Enum %s should be integers', static::class)
                 );
@@ -84,54 +92,60 @@ abstract class BitMask extends Enum
         return $array;
     }
 
-
     /**
      * @return string
      */
     public function getKey()
     {
-        return implode("|",$this->getKeyArray($this->value));
+        return implode('|', $this->getKeyArray($this->value));
     }
 
     /**
+     * @param mixed $value
+     *
      * @return array
      */
     public static function getKeyArray($value)
     {
-        $f     = array_filter(static::toArray(), function ($key) use (&$value) {
+        $f = array_filter(static::toArray(), function ($key) use (&$value) {
             return $value & $key;
         });
+
         return array_keys($f);
     }
+
     protected static function assertValidValueReturningKey($value): string
     {
         if (!static::isValid($value)) {
-            throw new \UnexpectedValueException("Value '$value' is not part of the enum " . static::class);
+            throw new \UnexpectedValueException("Value '$value' is not part of the enum ".static::class);
         }
 
-        return implode("|",self::getKeyArray($value));
+        return implode('|', self::getKeyArray($value));
     }
 
     /**
      * @throws \ReflectionException
+     *
      * @return string
      */
     public function __toString(): string
     {
-        $name  = $this->getName();
+        $name = $this->getName();
         $array = static::toArray();
-        $ret   = '';
+        $ret = '';
         foreach ($array as $key => $value) {
-            $ret .= "'" . $key . "' => " . ($this->{'is' . $key}() ? 'TRUE' : 'FALSE') . PHP_EOL;
+            $ret .= "'".$key."' => ".($this->{'is'.$key}() ? 'TRUE' : 'FALSE').PHP_EOL;
         }
-        return $name . '[' . PHP_EOL .
-            $ret .
-            ']' . PHP_EOL;
+
+        return $name.'['.PHP_EOL.
+            $ret.
+            ']'.PHP_EOL;
     }
 
     public function getName(): string
     {
         $path = explode('\\', __CLASS__);
+
         return array_pop($path);
     }
 }
