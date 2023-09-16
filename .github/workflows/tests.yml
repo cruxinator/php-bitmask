@@ -154,7 +154,7 @@ jobs:
           		--show-mutations \
           		--verbose \
           		--ignore-msi-with-no-mutations \
-          		--min-msi=100 \
+          		--min-msi=$MIN_MSI \
           		--logger-github
         env:
           BASE_BRANCH: origin/${{ github.base_ref }}
