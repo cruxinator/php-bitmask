@@ -13,8 +13,6 @@ on:
         type: boolean
         description: should a v be appended to start of tag.
         default: false
-      environment:
-        type: environment
 jobs:
   build:
     runs-on: ubuntu-22.04
