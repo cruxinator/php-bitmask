@@ -20,7 +20,7 @@ abstract class BitMask extends Enum
 
     protected function isComponentOfFlag(int $flag): bool
     {
-        return 0 === $flag ? 0 === $this->value : (($this->value & $flag) == $this->value);
+        return 0 === $flag ? $flag === $this->value : (($this->value & $flag) == $this->value);
     }
 
     protected function setFlag(int $flag, bool $value)
