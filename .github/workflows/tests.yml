@@ -154,7 +154,7 @@ jobs:
           		--show-mutations \
           		--verbose \
           		--ignore-msi-with-no-mutations \
-          		--min-msi=$MIN_MSI \
+          		--min-msi="${{ env.MIN_MSI }}" \
           		--logger-github
         env:
           BASE_BRANCH: origin/${{ github.base_ref }}
@@ -163,8 +163,8 @@ jobs:
         run: |
           php vendor/bin/infection --threads=max \
             --skip-initial-tests \
-            --min-msi=$MIN_MSI \
-            --min-covered-msi=$MIN_COVERED_MSI \
+            --min-msi="${{ env.MIN_MSI }}" \
+            --min-covered-msi="${{ env.$MIN_COVERED_MSI }}" \
             --coverage=build/logs  \
           	--show-mutations \
           	--verbose \
