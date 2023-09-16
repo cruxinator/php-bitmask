@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Cruxinator\BitMask\Tests;
 
+use Cruxinator\BitMask\BitMask;
+
 class BitmaskTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -25,7 +27,7 @@ class BitmaskTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($Val->isONE());
         $this->assertTrue($Val->isTWO());
         $this->assertFalse($Val->isFOUR());
-        $Val->setFOUR(true);
+        self::assertInstanceOf(BitMask::class, $Val->setFOUR(true),"calls to set should return a fluent response");
         $this->assertTrue($Val->isFOUR());
         $Val->setTWO(false);
         $this->assertFalse($Val->isTWO());
