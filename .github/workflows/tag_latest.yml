@@ -27,5 +27,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
           WITH_V: ${{ github.event.inputs.prefix-v }}
-          CUSTOM_TAG: ${{ github.event.inputs.dry-run }}
-          DRY_RUN: ${{ github.event.inputs.tag-value }}
+          DRY_RUN: ${{ github.event.inputs.dry-run }}
+          CUSTOM_TAG: ${{ github.event.inputs.tag-value }}
