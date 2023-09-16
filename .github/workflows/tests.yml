@@ -164,7 +164,7 @@ jobs:
           php vendor/bin/infection --threads=max \
             --skip-initial-tests \
             --min-msi="${{ env.MIN_MSI }}" \
-            --min-covered-msi="${{ env.$MIN_COVERED_MSI }}" \
+            --min-covered-msi="${{ env.MIN_COVERED_MSI }}" \
             --coverage=build/logs  \
           	--show-mutations \
           	--verbose \
