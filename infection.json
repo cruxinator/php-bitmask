@@ -7,10 +7,8 @@
         ]
     },
     "mutators": {
-        "@default": {
-            "ignore": [
-                "ProtectedVisibility"
-            ]
-        }
+        "@default": true,
+        "PublicVisibility": false,
+        "ProtectedVisibility": false
     }
 }

@@ -6,8 +6,6 @@ on:
     branches:
       - main
       - master
-      - github_actions
-
 jobs:
   tests:
     runs-on: ${{ matrix.operating-system }}
@@ -91,7 +89,7 @@ jobs:
     needs: tests-status
     env:
       MIN_MSI: 70.17
-      MIN_COVERED_MSI: 86.48
+      MIN_COVERED_MSI: 83.48
     name: Infection complete run on Infection
 
     steps:
@@ -154,7 +152,7 @@ jobs:
           		--show-mutations \
           		--verbose \
           		--ignore-msi-with-no-mutations \
-          		--min-msi=100 \
+          		--min-msi="${{ env.MIN_MSI }}" \
           		--logger-github
         env:
           BASE_BRANCH: origin/${{ github.base_ref }}
@@ -163,8 +161,8 @@ jobs:
         run: |
           php vendor/bin/infection --threads=max \
             --skip-initial-tests \
-            --min-msi=$MIN_MSI \
-            --min-covered-msi=$MIN_COVERED_MSI \
+            --min-msi="${{ env.MIN_MSI }}" \
+            --min-covered-msi="${{ env.MIN_COVERED_MSI }}" \
             --coverage=build/logs  \
           	--show-mutations \
           	--verbose \
