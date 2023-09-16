@@ -81,13 +81,13 @@ abstract class BitMask extends Enum
         $array = array_filter(parent::toArray(), function ($value): bool {
             return is_scalar($value);
         });
-        $firstTime && assert(array_walk($array, function ($item): void {
+        $firstTime && array_walk($array, function ($item): void {
             if (!is_int($item)) {
                 throw new UnexpectedValueException(
                     sprintf('All defined Const on Enum %s should be integers', static::class)
                 );
             }
-        }));
+        });
 
         return $array;
     }
