@@ -62,6 +62,7 @@ runs:
         latest=${{ steps.make-latest-request.outputs.response }}
         IFS='.'
         read -ra arr <<< "$latest"
+        echo "latest-release=$(echo ${arr[0]}.${arr[1]})" >> $GITHUB_OUTPUT
 
 
     - name: Parse Minimum Supported
