@@ -27,7 +27,7 @@ jobs:
         operating-system: [ ubuntu-latest]
         php-version: ${{ fromJSON(needs.output_releases.outputs.range) }}
         dependencies: [locked,  lowest, highest ]
-        coverage-driver: [ pcov ]
+        coverage-driver: [ xdebug ]
     name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }}; ${{ matrix.coverage-driver }})
     steps:
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: ${{ matrix.coverage-driver }}
-          ini-values: memory_limit=512M, xdebug.mode=off
+          ini-values: memory_limit=512M, xdebug.mode=coverage
           tools: composer
         env:
           GITHUB_TOKEN: ${{ secrets.COMPOSER_GITHUB_TOKEN }}
@@ -77,8 +77,7 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: vendor/bin/phpunit --coverage-clover clover.xml
-
+        run: vendor/bin/phpunit --coverage-clover=clover.xml --no-progress --path-coverage
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
         with:
