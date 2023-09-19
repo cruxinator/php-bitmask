@@ -27,7 +27,7 @@ jobs:
         operating-system: [ ubuntu-latest]
         php-version: ${{ fromJSON(needs.output_releases.outputs.range) }}
         dependencies: [locked,  lowest, highest ]
-        coverage-driver: [ pcov ]
+        coverage-driver: [ pcov, xdebug ]
     name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }};)
     steps:
       - name: Checkout code
@@ -77,7 +77,12 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --coverage-clover clover.xml
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@v2
+        with:
+          flag-name: run-${{ join(matrix.*, '-') }}
+          parallel: true
 
   # This is a meta job to avoid to have to constantly change the protection rules
   # whenever we touch the matrix.
