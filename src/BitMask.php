@@ -17,7 +17,7 @@ abstract class BitMask extends Enum
     protected static function assertValidValueReturningKey($value): string
     {
         if (!static::isValid($value)) {
-            throw new UnexpectedValueException("Value '$value' is not part of the enum " . static::class);
+            throw new UnexpectedValueException("Value '$value' is not part of the enum ".static::class);
         }
 
         return implode('|', self::getKeyArray($value));
@@ -40,9 +40,9 @@ abstract class BitMask extends Enum
      * @param $name
      * @param $arguments
      *
-     * @return bool|self
      * @throws ReflectionException
      *
+     * @return bool|self
      */
     public function __call($name, $arguments)
     {
@@ -51,7 +51,7 @@ abstract class BitMask extends Enum
         $regexFull = sprintf($regexBase, implode('$|', array_keys($array)));
         preg_match($regexFull, $name, $match);
         if (count($match) > 0 && $match[0] === $name) {
-            return $this->{$match[1] . 'Flag'}($array[$match[2]], $arguments[0] ?? true);
+            return $this->{$match[1].'Flag'}($array[$match[2]], $arguments[0] ?? true);
         }
 
         throw new BadMethodCallException(sprintf('Enum %s not found on %s', $name, get_class($this)));
@@ -100,9 +100,9 @@ abstract class BitMask extends Enum
     }
 
     /**
-     * @return string
      * @throws ReflectionException
      *
+     * @return string
      */
     public function __toString(): string
     {
@@ -110,12 +110,12 @@ abstract class BitMask extends Enum
         $array = static::toArray();
         $ret = '';
         foreach ($array as $key => $value) {
-            $ret .= "'" . $key . "' => " . ($this->{'is' . $key}() ? 'TRUE' : 'FALSE') . PHP_EOL;
+            $ret .= "'".$key."' => ".($this->{'is'.$key}() ? 'TRUE' : 'FALSE').PHP_EOL;
         }
 
-        return $name . '[' . PHP_EOL .
-            $ret .
-            ']' . PHP_EOL;
+        return $name.'['.PHP_EOL.
+            $ret.
+            ']'.PHP_EOL;
     }
 
     public function getName(): string
