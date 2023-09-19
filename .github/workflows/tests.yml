@@ -14,7 +14,19 @@ jobs:
       range: ${{ steps.releases.outputs.range }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: check dir 1
+        shell: bash
+        run: ls ./
+      - name: check dir 2
+        shell: bash
+        run: ls ./.github
+      - name: check dir 3
+        shell: bash
+        run: ls ./.github/actions
+      - name: check dir 4
+        shell: bash
+        run: ls ./.github/actions/php_ver
       - name: Fetch Current Releases
         uses: ./.github/actions/php_ver
         id: releases
