@@ -7,13 +7,25 @@ on:
       - main
       - master
 jobs:
+  output_releases:
+    name: Generate PHP Releases Array
+    runs-on: ubuntu-latest
+    outputs:
+      range: ${{ steps.releases.outputs.range }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Fetch Current Releases
+        uses: ./.github/actions/tag_bump
+        id: releases
   tests:
+    needs: output_releases
     runs-on: ${{ matrix.operating-system }}
     strategy:
       fail-fast: false
       matrix:
         operating-system: [ ubuntu-latest]
-        php-version: ['8.1', '8.4' ]
+        php-version: ${{ fromJSON(needs.output_releases.outputs.range) }}
         dependencies: [locked,  lowest, highest ]
         coverage-driver: [ pcov ]
     name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }};)
