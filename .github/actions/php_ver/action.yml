@@ -27,7 +27,8 @@ runs:
       id: store-user-input
       shell: bash
       run: |
-        echo "::set-output name=user-input::$(echo ${{ inputs.releases }})"
+        echo "name=user-input::$(echo ${{ inputs.releases }})" >> $GITHUB_OUTPUT
+
 
     - name: Make Latest Request
       id: make-latest-request
@@ -61,15 +62,16 @@ runs:
         latest=${{ steps.make-latest-request.outputs.response }}
         IFS='.'
         read -ra arr <<< "$latest"
-        echo "::set-output name=latest-release::$(echo ${arr[0]}.${arr[1]})"
+
 
     - name: Parse Minimum Supported
       id: parse-min
       if: steps.fetch-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        echo "::set-output name=min-active-release::$(echo ${{ fromJSON(steps.make-active-request.outputs.response).provided.major }}.${{ fromJSON(steps.make-active-request.outputs.response).provided.minor }})"
-        echo "::set-output name=min-security-release::$(echo ${{ fromJSON(steps.make-security-request.outputs.response).provided.major }}.${{ fromJSON(steps.make-security-request.outputs.response).provided.minor }})"
+        echo "name=min-active-release::$(echo ${{ fromJSON(steps.make-active-request.outputs.response).provided.major }}.${{ fromJSON(steps.make-active-request.outputs.response).provided.minor }})" >> $GITHUB_OUTPUT
+        echo "name=min-security-release::$(echo ${{ fromJSON(steps.make-security-request.outputs.response).provided.major }}.${{ fromJSON(steps.make-security-request.outputs.response).provided.minor }})" >> $GITHUB_OUTPUT
+
 
     - name: Return Response
       id: return-response
@@ -87,7 +89,8 @@ runs:
         fi
 
         if [ -z "${{ steps.store-user-input.outputs.user-input }}" ]; then
-          echo "::set-output name=releases-array::$(echo [${latest}, ${minAct}, ${minSec}])"
+          echo "name=releases-array::$(echo [${latest}, ${minAct}, ${minSec}])" >> $GITHUB_OUTPUT
+
         else
           userInput="${{ steps.store-user-input.outputs.user-input }}"
           IFS=', ' read -r -a array <<< "$userInput"
@@ -97,6 +100,7 @@ runs:
           printf -v formatted ',%s' "${deduped[@]}"
           formatted=${formatted:1}
 
-          echo "::set-output name=releases-array::$(echo [${formatted}])"
+          echo "name=releases-array::$(echo [${formatted}])" >> $GITHUB_OUTPUT
+
         fi
       shell: bash
