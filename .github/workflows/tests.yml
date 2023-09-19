@@ -7,16 +7,28 @@ on:
       - main
       - master
 jobs:
+  output_releases:
+    name: Generate PHP Releases Array
+    runs-on: ubuntu-latest
+    outputs:
+      range: ${{ steps.releases.outputs.range }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Fetch Current Releases
+        uses: ./.github/actions/php_ver
+        id: releases
   tests:
+    needs: output_releases
     runs-on: ${{ matrix.operating-system }}
     strategy:
       fail-fast: false
       matrix:
-        operating-system: [ ubuntu-latest, windows-latest ]
-        php-version: ['7.4', '8.0', '8.4' ]
+        operating-system: [ ubuntu-latest]
+        php-version: ${{ fromJSON(needs.output_releases.outputs.range) }}
         dependencies: [locked,  lowest, highest ]
-        coverage-driver: [ pcov ]
-    name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }};)
+        coverage-driver: [ xdebug ]
+    name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }}; ${{ matrix.coverage-driver }})
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,7 +38,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: ${{ matrix.coverage-driver }}
-          ini-values: memory_limit=512M, xdebug.mode=off
+          ini-values: memory_limit=512M, xdebug.mode=coverage
           tools: composer
         env:
           GITHUB_TOKEN: ${{ secrets.COMPOSER_GITHUB_TOKEN }}
@@ -65,7 +77,14 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: vendor/bin/phpunit
+        run: |
+          vendor/bin/phpunit --coverage-clover=clover.xml --path-coverage
+
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel: true
+          flag-name: "${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }}; ${{ matrix.coverage-driver }})"
 
   # This is a meta job to avoid to have to constantly change the protection rules
   # whenever we touch the matrix.
@@ -78,11 +97,14 @@ jobs:
       - name: Successful run
         if: ${{ !(contains(needs.*.result, 'failure')) }}
         run: exit 0
-
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v2
+        with:
+          parallel-finished: true
+          carryforward: "run-1,run-2"
       - name: Failing run
         if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
-
 
   infection:
     runs-on: ubuntu-latest
