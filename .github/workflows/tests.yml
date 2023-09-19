@@ -27,7 +27,7 @@ jobs:
         operating-system: [ ubuntu-latest]
         php-version: ${{ fromJSON(needs.output_releases.outputs.range) }}
         dependencies: [locked,  lowest, highest ]
-        coverage-driver: [ pcov, xdebug ]
+        coverage-driver: [ pcov ]
     name: Tests on ${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }}; ${{ matrix.coverage-driver }})
     steps:
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: ${{ matrix.coverage-driver }}
-          ini-values: memory_limit=512M, xdebug.mode=coverage
+          ini-values: memory_limit=512M, xdebug.mode=off
           tools: composer
         env:
           GITHUB_TOKEN: ${{ secrets.COMPOSER_GITHUB_TOKEN }}
