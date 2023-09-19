@@ -82,6 +82,7 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           parallel: true
+          flag-name: "${{ matrix.operating-system }}, PHP ${{ matrix.php-version }} (${{ matrix.dependencies }}; ${{ matrix.coverage-driver }})"
 
   # This is a meta job to avoid to have to constantly change the protection rules
   # whenever we touch the matrix.
