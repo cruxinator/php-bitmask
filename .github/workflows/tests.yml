@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Fetch Current Releases
-        uses: ./.github/actions/tag_bump
+        uses: ./.github/actions/php_ver
         id: releases
   tests:
     needs: output_releases
