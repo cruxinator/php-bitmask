@@ -78,7 +78,6 @@ jobs:
       - name: Run unit tests
         shell: bash
         run: |
-          vendor/bin/phpunit --migrate-configuration
           vendor/bin/phpunit --coverage-clover=clover.xml --path-coverage
 
       - name: Coveralls Parallel
@@ -98,14 +97,14 @@ jobs:
       - name: Successful run
         if: ${{ !(contains(needs.*.result, 'failure')) }}
         run: exit 0
-      - name: Failing run
-        if: ${{ contains(needs.*.result, 'failure') }}
-        run: exit 1
       - name: Coveralls Finished
         uses: coverallsapp/github-action@v2
         with:
           parallel-finished: true
           carryforward: "run-1,run-2"
+      - name: Failing run
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
 
   infection:
     runs-on: ubuntu-latest
