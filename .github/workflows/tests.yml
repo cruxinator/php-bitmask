@@ -77,7 +77,10 @@ jobs:
 
       - name: Run unit tests
         shell: bash
-        run: vendor/bin/phpunit --coverage-clover=clover.xml --path-coverage
+        run: |
+          vendor/bin/phpunit --migrate-configuration
+          vendor/bin/phpunit --coverage-clover=clover.xml --path-coverage
+
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@v2
         with:
